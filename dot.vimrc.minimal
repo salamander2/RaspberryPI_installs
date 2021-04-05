@@ -1,0 +1,10 @@
+syntax enable
+set number
+set t_Co=256
+colorscheme murphy
+set cursorcolumn
+"
+set laststatus=2
+set tabstop=4
+set shiftwidth=4
+

@@ -1,0 +1,11 @@
+Log onto console.
+
+Run `sudo raspi-config`
+
+Enable SSH
+Set Localizations: language, timezone, keyboard?
+Expand filesystem.
+
+For headless server, reduce GPU RAM (64--> 16)
+
+Reboot
