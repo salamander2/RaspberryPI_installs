@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# ================= set static IP ================
+sudo cat <<EOF >> /etc/dhcpcd.conf
+
+interface eth0
+static ip_address=192.168.192.14
+static routers=192.168.192.1
+static domain_name_servers=192.168.192.1 8.8.8.8
+static domain_search=
+EOF
+
+echo -e "\n Static IP address set. Please reboot"
+echo -e "Note: this assumes that the network interface is eth0. Please check: "
+
+ifconfig -a -s

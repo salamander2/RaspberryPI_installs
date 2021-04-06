@@ -1,0 +1,19 @@
+#!/bin/bash
+
+system_config
+set_pin21
+
+install_updates
+install_pinout
+install_bashrc
+
+install_newSuperUser
+#reboot?
+echo -e "\n*** Warning: changing IP address. This may lock you out of the system after a reboot. ***"
+install_staticIP
+#reboot?
+
+echo -e "\n*** Warning: changing port and disabling password authentication. This may lock you out of the system after a reboot. ***"
+install_sshd
+#reboot
+

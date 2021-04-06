@@ -1,17 +1,4 @@
 #!/bin/bash
-
-# ================= set static IP ================
-echo -e "\n Setting static IP address"
-sudo cat <<EOF >> /etc/dhcpcd.conf
-
-interface eth0
-static ip_address=192.168.192.14
-static routers=192.168.192.1
-static domain_name_servers=192.168.192.1 8.8.8.8
-static domain_search=
-EOF
-
-
 # ================= set up private key ================
 # use ssh-copy-id
 # or for squiffy, copy whole .ssh folder
