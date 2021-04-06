@@ -1,0 +1,24 @@
+#!/bin/bash
+
+pyver=`python -V 2>&1 | cut -d ' ' -f 2 | cut -b 1`
+if [ $pyver -eq 3 ]; then
+    echo -e "Python version 3 detected \n"
+    sudo apt install python3-gpiozero
+else
+    if [ $pyver -eq 2 ]; then
+	echo -e "Python version 2 detected \n"
+        sudo apt install python-gpiozero
+    else
+        echo "ERROR! Python version must be 2 or 3"
+        exit
+    fi 
+fi
+
+cat <<EOF > ~/bin/pinout
+#!/usr/bin/env python
+from gpiozero import pi_info
+pi_info().pprint()
+EOF
+
+chmod u+x ~/bin/pinout
+~/bin/pinout

@@ -13,6 +13,10 @@ mkdir ~/bin
 #6. There will still be a group called pi. That's okay.
 
 user="minix"
+echo "Please enter new super user name now"
+read user
+
+echo "Creating user --$user--"
 
 sudo adduser $user
 sudo usermod -aG sudo $user

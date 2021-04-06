@@ -5,7 +5,6 @@ sed -i -E 's/HISTFILESIZE=.000/HISTFILESIZE=9000/' ~/.bashrc
 sed -i -E 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
 
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[00;39;40m\]\l\[\033[00;31;40m\] AWS \[\033[00;33m\] \A:\[\033[00;32m\]$PWD>\[\033[00m\]'
-#PS1='${debian_chroot:+($debian_chroot)}\l\[\033[00;32m\]\u@\h|\[\033[00;33m\]\A:\[\033[01;34m\]$PWD>\[\033[00m\]'
 
 sed -i -E '/PS1=.*033\[00m.*/c\PS1='"'"'\${debian_chroot:+(\$debian_chroot)}\\[\\033[00;32m\\]\\u@\\h|\\[\\033[00;33m\\]\\A:\\[\\033[01;34m\\]\$PWD>\\[\\033[00m\\]'"'" ~/.bashrc
 
@@ -15,6 +14,16 @@ sed -i '/alias ll=/c\alias ll='"'"'ls -l'"'" ~/.bashrc
 #Fix these too
 #alias la='ls -A'
 #alias l='ls -CF'
+
+cat <<EOF >> ~/.bashrc
+
+#MACHINE="AWS1"
+#for primary account
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[00;39;40m\]\l\[\033[00;30;41m\] \$MACHINE \[\033[00;33m\] \A:\[\033[00;32m\]\$PWD>\[\033[00m\]'
+#for secondary accounts:
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[00;31;47m\]\l\[\033[00;34;40m\] \$MACHINE\[\033[00;30;1m\]@\u \[\033[00;33m\]\A:\[\033[00;32m\]\$PWD>\[\033[00m\]'
+
+EOF
 
 echo "" >> ~/.bashrc
 echo "export EDITOR='vim'" >> ~/.bashrc

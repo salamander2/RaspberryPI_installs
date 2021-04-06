@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# ================= set static IP ================
+echo -e "\n Setting static IP address"
+sudo cat <<EOF >> /etc/dhcpcd.conf
+
+interface eth0
+static ip_address=192.168.192.14
+static routers=192.168.192.1
+static domain_name_servers=192.168.192.1 8.8.8.8
+static domain_search=
+EOF
+
+
+# ================= set up private key ================
+# use ssh-copy-id
+# or for squiffy, copy whole .ssh folder
+# chmod 600 ~/.ssh/authorized_keys
+
+# ================= configure SSHD ================
+
+cd /etc/ssh
+
+sudo sed -i 's/#Port 22/Port 2203/' sshd_config
+sudo sed -i 's/#SyslogFacility AUTH/SyslogFacility AUTH/' sshd_config
+sudo sed -i 's/#LogLevel INFO/LogLevel INFO/' sshd_config
+sudo sed -i 's/#LoginGraceTime 2m/LoginGraceTime 2m/' sshd_config
+sudo sed -i 's/#StrictModes yes/StrictModes yes/' sshd_config
+sudo sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' sshd_config
+sudo sed -i 's/PrintMotd no/PrintMotd yes/' sshd_config
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' sshd_config
+sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' sshd_config
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' sshd_config
+#FOR SQUIFFY
+#MH. Increased so that reverse tunneling stays connected. --> 99999  ??
+sudo sed -i 's/#ClientAliveInterval 30/ClientAliveInterval 30/' sshd_config
+#MH. Reverse tunneling will reconnect after 30 min, .: reduce AliveCount
+sudo sed -i 's/#ClientAliveCountMax 60/ClientAliveCountMax 60/' sshd_config
+echo "AllowUsers adelaide k32qz64 git" | sudo tee -a sshd_config
+
+echo -e "\nSSHD is now setup. Please run 'sudo service ssh restart' once you have private keys working."
+#sudo service ssh restart
