@@ -9,3 +9,6 @@ Expand filesystem.
 For headless server, reduce GPU RAM (64--> 16)
 
 Reboot
+
+Then run "run_install" with the appropriate parts commented out
+and then copy over all of the needed files from superuser in old RPi to this superuser.
