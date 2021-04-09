@@ -93,7 +93,7 @@ menubar_visible=1
 free_space=1
 horizontal_split=0
 vertical_equal=1
-left_panel_size=100
+left_panel_size=50
 horizontal_equal=1
 top_panel_size=1
 
@@ -114,7 +114,7 @@ base_color=normal=default,default:marked=yellow,default:viewnormal=lightgray,bla
 xterm=
 color_terminals=
 
-screen=
+screen-256color=
 
 [Panels]
 show_mini_info=true
@@ -129,14 +129,13 @@ reverse_files_only=true
 auto_save_setup_panels=false
 navigate_with_arrows=false
 panel_scroll_pages=true
+panel_scroll_center=false
 mouse_move_pages=true
 filetype_mode=true
 permission_mode=false
 torben_fj_mode=false
 quick_search_mode=2
 select_flags=6
-
-simple_swap=false
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

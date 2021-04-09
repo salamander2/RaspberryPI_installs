@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# setup .vim directory
+cp -r ./files/dot.vim/ ~/.vim/
+cp ./files/dot.vimrc ~/.vimrc
+
+#setup mc
+cp ./files/mc_ini ~/.config/mc/ini
+cp ./files/mc.keymap ~/.config/mc/mc.keymap
+cp ./files/mc_panels.ini ~/.config/mc/panels.ini 
+
+#setup byobu. Only the "status" file has been modified
+cp ./files/dot.byobu/status ~/.byobu/status 
+
+
