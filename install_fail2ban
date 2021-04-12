@@ -1,0 +1,69 @@
+#!/bin/bash
+
+sudo apt-get -y install fail2ban
+
+cd /etc/fail2ban
+
+#######   FIXME  These lines do not work, they don't replace the whole line, just insert
+#sudo sed -i -E 's/^ignoreip*/ignoreip = 192.168.192.0\/24/' jail.conf
+#sudo sed -i -E 's/^#ignoreip*/ignoreip = 192.168.192.0\/24/' jail.conf
+
+sudo service fail2ban start
+
+## FIXME These don't print the $variable. It just disappears. Escaping it might fix it. Check the two files afterwards.
+cat <<EOF > ~/bin/fail2ban-list
+#!/bin/bash
+JAILS=`sudo fail2ban-client status | grep "Jail list" | sed -E 's/^[^:]+:[ \t]+//' | sed 's/,//g'`
+for JAIL in \$JAILS
+do
+  sudo fail2ban-client status \$JAIL
+done
+
+#
+echo -e "\nList of Fail22Ban chains:\n"
+echo "========================"
+CHAINS=`sudo iptables -L | grep ^f2b | cut -d " " -f 1`
+
+echo \$CHAINS
+
+echo -e "\nList of IPs banned:\n"
+echo "===================="
+for cc in \$CHAINS; do
+    CMD="sudo iptables -L \$cc"
+    echo \$CMD
+    eval \$CMD
+done
+EOF
+
+cat <<EOF > ~/bin/banip
+#!/bin/bash
+
+#DO NOT BAN YOUR OWN IP! CHECK FOR THIS FIRST
+#This command is predicated on a jail being active called sshd
+
+if [[ -z \$1 ]]; then
+	echo "Please enter IP to ban:"
+	read IP
+else 
+	IP=\$1
+fi
+
+echo banning \$IP
+sudo fail2ban-client set sshd banip \$IP
+EOF
+
+chmod u+x ~/bin/banip
+chmod u+x ~/bin/fail2ban-list
+
+
+exit
+#####
+# configure fail2ban
+/etc/fail2ban/jail.conf
+
+in [sshd] section: 
+port = 9876 (or whatever)
+
+set default ban times in jail.local
+and check them!!! using fail2ban-client get bantime sshd
+

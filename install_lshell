@@ -1,8 +1,4 @@
 #!/bin/bash
-#NOTE the official lshell repo has two major security flaws. It is no longer being updated.
-# It is version 0.9.8 from 2016.  Do not use it. 
-# The following version has fixed the security flaws.
-
 wget https://github.com/omega8cc/lshell/archive/refs/heads/master-om8.zip
 unzip master-om8.zip
 cd *om8
@@ -15,7 +11,7 @@ sudo usermod -aG lshellg k32qz56
 sudo usermod -aG users k32qz56
 sudo chsh -s /usr/bin/lshell k32qz56
 
-# setup log, however LOGROTATE is not doing anything to it.
+# setup log
 sudo mkdir /var/log/lshell
 sudo chown :lshellg /var/log/lshell
 sudo chmod 770 /var/log/lshell
@@ -25,3 +21,13 @@ echo "Please 'sudo vi /etc/lshell.conf' and make the following changes:"
 echo "allowed         : ['ls','echo','ll','uname']"
 echo "overssh         : ['uname']"
 echo "strict          : 1"
+
+
+# setup public/private keys for login
+cd /home/k32qz56
+sudo mkdir .ssh
+#now copy the authorized_keys file into .ssh
+sudo chmod 700 .ssh
+sudo chown k32qz56:k32qz56 .ssh
+sudo chmod 600 .ssh/authorized_keys
+sudo chown k32qz56:k32qz56 .ssh/authorized_keys
