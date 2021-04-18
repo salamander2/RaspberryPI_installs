@@ -1,10 +1,21 @@
 #!/bin/bash
 
+if [ -z $1 ]; then
+	echo "no parameter for IP address"
+	exit
+fi
+
+#IP is assumed to be an integer in the correct range.
+IP=$1
+
+echo -e "\n*** Warning: changing IP address. This may lock you out of the system after a reboot. ***"
+echo "Press <ENTER> to continue"
+read junk
 # ================= set static IP ================
 sudo cat <<EOF >> /etc/dhcpcd.conf
 
 interface eth0
-static ip_address=192.168.192.14
+static ip_address=192.168.192.$IP
 static routers=192.168.192.1
 static domain_name_servers=192.168.192.1 8.8.8.8
 static domain_search=

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
+
+cat /etc/apt/sources.list{,.d/*.list}
+
+sudo apt-get update
+
+sudo apt install -y php7.4 php7.4-common php7.4-curl php7.4-json php7.4-mysql php7.4-mbstring php7.4-zip 
+php -v
+
+#This assumes that apache has been installed first
+sudo a2enmod php7.4

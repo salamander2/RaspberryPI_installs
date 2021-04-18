@@ -2,14 +2,12 @@
 
 mkdir ~/bin
 
-
-#Remove default PI user
-#(steps -- see below)
+#Steps to remove default PI user
 #1. create a new user
 #2. update the /etc/sudoers* files
 #3. login as new user
 #4. delete the user pi
-#5. check the home directory of pi and clear that out too.
+#5. check the home directory of pi and clear that out too if so desired
 #6. There will still be a group called pi. That's okay.
 
 user="minix"
@@ -59,4 +57,13 @@ echo "Then run the following commands"
 echo "> sudo -l"
 echo "> groups"
 echo "> sudo deluser pi"
+echo ""
+echo "These commands will be stored in \$HOME/install_commands_to_run"
+
+touch $HOME/install_commands_to_run
+echo -e "\n#From 'install_newSuperUser'"
+echo "sudo -l" >> $HOME/install_commands_to_run
+echo "groups" >> $HOME/install_commands_to_run
+echo "sudo deluser pi" $HOME/install_commands_to_run
+
 exit

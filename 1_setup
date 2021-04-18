@@ -4,7 +4,8 @@ Run `sudo raspi-config`
 
 Enable SSH
 Set Localizations: language, timezone, keyboard?
-Expand filesystem.
+Expand filesystem <<< Only do this after the whole raspberry pi is set up as you want it to be. Do a backup (dd if=... of=backupname.img) before you expand the filesystem.
+   It may not need to be expanded at all.
 
 For headless server, reduce GPU RAM (64--> 16)
 

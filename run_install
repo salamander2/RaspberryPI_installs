@@ -1,19 +1,81 @@
 #!/bin/bash
 
+#***************************************************************
+#* This is a list of useful scripts for setting up a new RPi.  *
+#* Uncomment/Comment the ones you want.                        *
+#* Anything that requires user input or rebooting is labeled   *
+#***************************************************************
+
+#================================================================================
+# Any system configuration that needs doing
+# set swappiness to 1 from 60
 system_config
+
+#================================================================================
+# pin21 can be used to shutdown the Pi.
+# Just short it out with the ground pin next to it.
 set_pin21
 
+#================================================================================
+# install updates and also packages that I want
 install_updates
+
+# install pinout package and command
 install_pinout
+
+#================================================================================
+# fixup bashrc (and .profile). Change prompt, add alias, history size ...
 install_bashrc
 
-install_newSuperUser
-#reboot?
-echo -e "\n*** Warning: changing IP address. This may lock you out of the system after a reboot. ***"
-install_staticIP
-#reboot?
+#================================================================================
+# install Vim plugins and .vimrc settings
+# The files are in this repo.
+config_vim
 
+#================================================================================
+# install apache2
+# EXTRA CONFIGURATION REQUIRED: check the script. 
+#	apache2.conf needs editing in certain situations
+install_apache
+
+#================================================================================
+# install php 7.4 and all of the php packages that are normally needed.
+install_php
+
+#================================================================================
+# installs a new superuser and prepares to removes 'pi' user.
+# INPUT REQUIRED: new username
+# REBOOT REQUIRED
+# Extra commands to run saved.
+install_newSuperUser
+
+#================================================================================
+# Sets static IP. Assumes network device is "eth0"
+# INPUT REQUIRED: confirm action
+# Add the last octet for IP address in command line (eg. 25 --> 192.168.1.25)
+# REBOOT REQUIRED
+install_staticIP 25
+
+#================================================================================
+# Configures sshd_conf, adds public_key
+# EXTRA CONFIGURATION REQUIRED: check the script. 
+#	Requires you to manually copy public key and test it before you reboot.
+#	use ssh-copy-id
+# REBOOT REQUIRED
 echo -e "\n*** Warning: changing port and disabling password authentication. This may lock you out of the system after a reboot. ***"
 install_sshd
-#reboot
+
+#================================================================================
+# Installs fail2ban
+# This is only needed on the access controller RPi.
+# EXTRA CONFIGURATION REQUIRED: check the script. 
+#	Some of the files created my not work.
+#	jail.conf needs modifying
+#install_fail2ban
+
+#================================================================================
+# Installs LSHELL - for a very specific user. 
+# This is only needed on the access controller RPi.
+#install_lshell
+
 
