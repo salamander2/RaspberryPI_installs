@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 #Shutdown when pin GPIO21 (#40) shorted out
 #Add to /boot/config.txt to initiate a shutdown when GPIO pin changes.
 

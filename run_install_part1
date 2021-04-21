@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Script: RUN_INSTALL_PART1
+
+#***************************************************************
+#* This is a list of useful scripts for setting up a new RPi.  *
+#* Uncomment/Comment the ones you want.                        *
+#* Anything that requires user input or rebooting is labeled   *
+#***************************************************************
+
+mkdir ~/bin
+
+#================================================================================
+# Any system configuration that needs doing
+# set swappiness to 1 from 60
+
+./system_config
+
+#================================================================================
+# pin21 can be used to shutdown the Pi.
+# Just short it out with the ground pin next to it.
+
+./set_pin21
+
+#================================================================================
+# install updates and also packages that I want
+
+./install_updates
+
+#================================================================================
+# install apache2
+# EXTRA CONFIGURATION REQUIRED: check the script. 
+#	apache2.conf needs editing in certain situations
+
+./install_apache
+
+#================================================================================
+# install php 7.4 and all of the php packages that are normally needed.
+
+./install_php
+
+#================================================================================
+# Sets static IP. Assumes network device is "eth0"
+# INPUT REQUIRED: confirm action
+# Add the last octet for IP address in command line (eg. 25 --> 192.168.1.25)
+# REBOOT REQUIRED
+
+./install_staticIP 25
+
+#================================================================================
+# installs a new superuser and prepares to removes 'pi' user.
+# INPUT REQUIRED: new username
+# REBOOT REQUIRED
+# Extra commands to run saved.
+
+./install_newSuperUser
+
+echo "Log off now and login in again with the new user that you just created. Then run part 2 of this script"
+exit
+

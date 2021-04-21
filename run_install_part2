@@ -1,61 +1,46 @@
 #!/bin/bash
 
+# Script: RUN_INSTALL_PART2
+
 #***************************************************************
 #* This is a list of useful scripts for setting up a new RPi.  *
 #* Uncomment/Comment the ones you want.                        *
 #* Anything that requires user input or rebooting is labeled   *
 #***************************************************************
 
-#================================================================================
-# Any system configuration that needs doing
-# set swappiness to 1 from 60
-system_config
+# Part 2 continues from part 1, assuming that you've created a new superuser and want to delete the user pi.
 
+if [ "$(whoami)" != "pi" ]; then
+	w
+	sudo -l
+	groups
+    echo "If running GUI then you have to make sure that that is logged off too before deleting PI user."
+	echo "Do you want to delete user 'pi'?"
+	read answer
+	if [ $answer == "y" ] || [ $answer == "Y" ]; then
+		sudo deluser pi
+	fi
+fi
 #================================================================================
-# pin21 can be used to shutdown the Pi.
-# Just short it out with the ground pin next to it.
-set_pin21
-
+#   ------------ commands that pertain to current user ----------------
 #================================================================================
-# install updates and also packages that I want
-install_updates
-
 # install pinout package and command
-install_pinout
+
+./install_pinout
 
 #================================================================================
 # fixup bashrc (and .profile). Change prompt, add alias, history size ...
-install_bashrc
+
+./install_bashrc
 
 #================================================================================
-# install Vim plugins and .vimrc settings
+# install Vim plugins and .vimrc settings (and MC and Byobu settings)
 # The files are in this repo.
-config_vim
+
+./config_vim
 
 #================================================================================
-# install apache2
-# EXTRA CONFIGURATION REQUIRED: check the script. 
-#	apache2.conf needs editing in certain situations
-install_apache
-
-#================================================================================
-# install php 7.4 and all of the php packages that are normally needed.
-install_php
-
-#================================================================================
-# installs a new superuser and prepares to removes 'pi' user.
-# INPUT REQUIRED: new username
-# REBOOT REQUIRED
-# Extra commands to run saved.
-install_newSuperUser
-
-#================================================================================
-# Sets static IP. Assumes network device is "eth0"
-# INPUT REQUIRED: confirm action
-# Add the last octet for IP address in command line (eg. 25 --> 192.168.1.25)
-# REBOOT REQUIRED
-install_staticIP 25
-
+#   -------- commands that require care or are only for special use ---------
 #================================================================================
 # Configures sshd_conf, adds public_key
 # EXTRA CONFIGURATION REQUIRED: check the script. 
@@ -63,7 +48,8 @@ install_staticIP 25
 #	use ssh-copy-id
 # REBOOT REQUIRED
 echo -e "\n*** Warning: changing port and disabling password authentication. This may lock you out of the system after a reboot. ***"
-install_sshd
+
+./install_sshd
 
 #================================================================================
 # Installs fail2ban
@@ -71,11 +57,16 @@ install_sshd
 # EXTRA CONFIGURATION REQUIRED: check the script. 
 #	Some of the files created my not work.
 #	jail.conf needs modifying
-#install_fail2ban
+
+#./install_fail2ban
 
 #================================================================================
 # Installs LSHELL - for a very specific user. 
 # This is only needed on the access controller RPi.
-#install_lshell
+
+#./install_lshell
 
 
+echo "**********************************************************************"
+echo "Install script complete!"
+echo "**********************************************************************"

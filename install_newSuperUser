@@ -60,10 +60,10 @@ echo "> sudo deluser pi"
 echo ""
 echo "These commands will be stored in \$HOME/install_commands_to_run"
 
-touch $HOME/install_commands_to_run
-echo -e "\n#From 'install_newSuperUser'"
-echo "sudo -l" >> $HOME/install_commands_to_run
-echo "groups" >> $HOME/install_commands_to_run
-echo "sudo deluser pi" $HOME/install_commands_to_run
+#touch $HOME/install_commands_to_run
+#echo -e "\n#From 'install_newSuperUser'"
+#echo "sudo -l" >> $HOME/install_commands_to_run
+#echo "groups" >> $HOME/install_commands_to_run
+#echo "sudo deluser pi" >> $HOME/install_commands_to_run
 
 exit
