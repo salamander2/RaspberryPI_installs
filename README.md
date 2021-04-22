@@ -11,7 +11,8 @@ There are a lot of useful scripts here, in particular, how to create a new sudo 
 
 4️⃣ Now, after running various commands to make sure that the new user works, the scripts will delete user 'pi'. It will continue by installing user specific changes.
 
-##💥 Problems: 
+## 💥 Problems: 
+
 ▶️ The SSH update can lock you out of your computer    
 ▶️ GUI vs Server makes a difference. There are extra things I want to configure on a GUI based system. 
 
