@@ -23,6 +23,13 @@ mkdir ~/bin
 ./set_pin21
 
 #================================================================================
+# install backup script
+# Add the name of the computer or else it will default to mypi 
+# (or if this is removed, it defaults to piserver)
+
+./install_backup mypi
+
+#================================================================================
 # install updates and also packages that I want
 
 ./install_updates

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Make sure that you change the machine name to whatever you want.
+if [ -z $1 ]; then
+	#no parameter
+	MACHINE="piserver"
+else
+	MACHINE=$1
+fi
+
+sudo mkdir /backups
+
+cat > /tmp/fullOSbackup.sh << EOF
+#!/bin/bash
+cd /
+
+#make sure that /backups exists (this is unnecessary since this file resides in /backups)
+#if [ -d /backups ]; then
+#else
+#   echo "/backups does not exist"
+#   exit
+#fi
+
+#unmount any shares (sshfs)
+
+#backup OS
+MACHINE="${MACHINE}"
+DT=\`date '+%Y%m%d'\`
+FILENAME="\${MACHINE}.fullOSbackup.\${DT}.tar.gz"
+sudo tar -cvpzf /backups/\$FILENAME --directory=/ --exclude=proc --exclude=sys --exclude=dev --exclude=run --exclude=tmp --exclude=backups --one-file-system .
+sudo chmod 400 /backups/\$FILENAME
+
+# one-file system excludes /boot so back it up seperately, since I'm modifying /boot/config.txt
+FILENAME="\${MACHINE}.bootBackup.\${DT}.tar.gz"
+sudo tar -cvpzf /backups/\$FILENAME --directory=/ --one-file-system ./boot
+sudo chmod 400 /backups/\$FILENAME
+
+# remember to remount shares if they are unmounted
+EOF
+
+sudo mv /tmp/fullOSbackup.sh /backups/
+sudo chown root: /backups/fullOSbackup.sh
+sudo chmod 744 /backups/fullOSbackup.sh
+
