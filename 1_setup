@@ -2,14 +2,16 @@ Log onto console.
 
 Run `sudo raspi-config`
 
-Enable SSH
-Set Localizations: language, timezone, keyboard?
-Expand filesystem <<< Only do this after the whole raspberry pi is set up as you want it to be. Do a backup (dd if=... of=backupname.img) before you expand the filesystem.
+* Enable SSH
+* Set Localizations: language, timezone, keyboard?
+* Expand filesystem <<< Only do this after the whole raspberry pi is set up as you want it to be. Do a backup (dd if=... of=backupname.img) before you expand the filesystem.
    It may not need to be expanded at all.
-
-For headless server, reduce GPU RAM (64--> 16)
+* For headless server, reduce GPU RAM (64--> 16)
 
 Reboot
 
-Then run "run_install" with the appropriate parts commented out
-and then copy over all of the needed files from superuser in old RPi to this superuser.
+If GUI, remove unwanted software now using "Preferences / Recommended Software" tool. (Removing it now prevents wasting time updating it and then removing it)
+
+Then run "run_install_part1" and "run_install_part2" with the appropriate parts commented out.
+
+Copy over all of the needed files (scripts, bin, crontabs) from superuser in old RPi to this superuser.
