@@ -1,7 +1,7 @@
 # RaspberryPI_installs
 Install scripts for my Raspberry Pis.
 
-There are a lot of useful scripts here, in particular, how to create a new sudo user to replace the default 'pi'.  Which scripts you want to use depends on what your RPi is bing used for. A headless server (running the lite version of the OS) is quite different from a GUI based machine.
+There are a lot of useful scripts here, in particular, how to create a new sudo user to replace the default 'pi'.  Which scripts you want to use depends on what your RPi is bing used for. A headless server (running the lite version of the OS) is quite different from a GUI based machine. 🚨 You can also just use whichever scripts you want by themselves. 🚨
 
 1️⃣ First follow the steps in 1_setup
 
