@@ -20,10 +20,10 @@ sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' sshd_config
 sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' sshd_config
 #FOR SQUIFFY
 #MH. Increased so that reverse tunneling stays connected. --> 99999  ??
-sudo sed -i 's/#ClientAliveInterval 30/ClientAliveInterval 30/' sshd_config
+#sudo sed -i 's/#ClientAliveInterval 30/ClientAliveInterval 30/' sshd_config
 #MH. Reverse tunneling will reconnect after 30 min, .: reduce AliveCount
-sudo sed -i 's/#ClientAliveCountMax 60/ClientAliveCountMax 60/' sshd_config
-echo "AllowUsers adelaide k32qz64 git" | sudo tee -a sshd_config
+#sudo sed -i 's/#ClientAliveCountMax 60/ClientAliveCountMax 60/' sshd_config
+#echo "AllowUsers adelaide k32qz64 git" | sudo tee -a sshd_config
 
 echo -e "\nSSHD is now setup. Please run 'sudo service ssh restart' once you have private keys working."
 #sudo service ssh restart
