@@ -16,3 +16,16 @@ There are a lot of useful scripts here, in particular, how to create a new sudo 
 ▶️ The SSH update can lock you out of your computer    
 ▶️ GUI vs Server makes a difference. There are extra things I want to configure on a GUI based system, eg. single click on icons, adding icons to desktop ...
 
+✴️ TODO
+
+Add an option to disable AVAHI-DAEMON
+
+```
+systemctl status | grep avahi
+This will disable, but not stop it: sudo systemctl disable avahi-daemon
+BEST:
+sudo vi /etc/default/avahi-daemon
+    Change the line: AVAHI_DAEMON_START = 1
+    to: AVAHI_DAEMON_START = 0
+Reboot your system
+```
